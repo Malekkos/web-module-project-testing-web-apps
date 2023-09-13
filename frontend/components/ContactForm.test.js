@@ -33,7 +33,8 @@ test('renders the contact form header', () => {
   //Arrange
   render(<ContactForm />)
   //Act
-  const header = screen.getByText("Contact Form") // dont need the special way of //i because this is hardcoded
+  const header = screen.queryByText("Contact Form") // dont need the special way of //i because this is hardcoded
+  //Should use query when getting things
   // console.log(header)
   //Assert
   // Reqs are ; be in the document, determine if 'heads' is truthy?, and if text content is what it should be
@@ -47,7 +48,7 @@ test('renders ONE error message if user enters less then 5 characters into first
   //Arrange
   render(<ContactForm />)
   //Act
-  const firstNameInput = screen.getByPlaceholderText("Edd")
+  const firstNameInput = screen.queryByPlaceholderText("Edd")
   // console.log(firstNameInput)//It is getting it
   await userEvent.click(firstNameInput)
   await userEvent.type(firstNameInput, "eddy") //When doing type, YOU HAVE TO TELL IT WHERE TO TYPE!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -59,10 +60,10 @@ test('renders ONE error message if user enters less then 5 characters into first
 test('renders THREE error messages if user enters no values into any fields.', async () => {
   render(<ContactForm />)
 
-  const firstNameInput = screen.getByPlaceholderText("Edd")
-  const lastNameInput = screen.getByPlaceholderText("Burke")
-  const emailInput = screen.getByPlaceholderText("bluebill1049@hotmail.com")
-  const submitButton = screen.getByRole("button")
+  const firstNameInput = screen.queryByPlaceholderText("Edd")
+  const lastNameInput = screen.queryByPlaceholderText("Burke")
+  const emailInput = screen.queryByPlaceholderText("bluebill1049@hotmail.com")
+  const submitButton = screen.queryByRole("button")
   
   userEvent.type(firstNameInput, "asda")
   userEvent.type(lastNameInput, "asdas")
@@ -80,15 +81,15 @@ test('renders THREE error messages if user enters no values into any fields.', a
 test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
   render(<ContactForm />)
 
-  const firstNameInput = screen.getByPlaceholderText("Edd")
-  const lastNameInput = screen.getByPlaceholderText("Burke")
-  const submitButton = screen.getByRole("button")
+  const firstNameInput = screen.queryByPlaceholderText("Edd")
+  const lastNameInput = screen.queryByPlaceholderText("Burke")
+  const submitButton = screen.queryByRole("button")
 
   userEvent.type(firstNameInput, "Markus")
   userEvent.type(lastNameInput, "Loodenburg")
   userEvent.click(submitButton)
 
-  const error = screen.getByTestId("error")
+  const error = screen.queryByTestId("error")
   expect(error).toBeVisible()
 
 });
@@ -96,24 +97,24 @@ test('renders ONE error message if user enters a valid first name and last name 
 test('renders "email must be a valid email address" if an invalid email is entered', async () => {
   render(<ContactForm />)
 
-  const emailInput = screen.getByPlaceholderText("bluebill1049@hotmail.com")
+  const emailInput = screen.queryByPlaceholderText("bluebill1049@hotmail.com")
 
   userEvent.type(emailInput, "afd234f749hasd")
-  const errorEmail = screen.getByText("Error: email must be a valid email address.")
+  const errorEmail = screen.queryByText("Error: email must be a valid email address.")
   expect(errorEmail).toHaveTextContent("Error: email must be a valid email address.")
 });
 
 test('renders "lastName is a required field" if an last name is not entered and the submit button is clicked', async () => {
   render(<ContactForm />)
 
-  const firstNameInput = screen.getByPlaceholderText("Edd")
-  const emailInput = screen.getByPlaceholderText("bluebill1049@hotmail.com")
-  const submitButton = screen.getByRole("button")
+  const firstNameInput = screen.queryByPlaceholderText("Edd")
+  const emailInput = screen.queryByPlaceholderText("bluebill1049@hotmail.com")
+  const submitButton = screen.queryByRole("button")
 
   userEvent.type(firstNameInput, "Joseph")
   userEvent.type(emailInput, "phiraxxis@hotmedia.com")
   userEvent.click(submitButton)
-  const errorLastName = screen.getByText("Error: lastName is a required field.")
+  const errorLastName = screen.queryByText("Error: lastName is a required field.")
 
   expect(errorLastName).toHaveTextContent("Error: lastName is a required field.")
 
@@ -122,10 +123,10 @@ test('renders "lastName is a required field" if an last name is not entered and 
 test('renders all firstName, lastName and email text when submitted. Does NOT render message if message is not submitted.', async () => {
   render(<ContactForm />)
 
-  const firstNameInput = screen.getByPlaceholderText("Edd")
-  const lastNameInput = screen.getByPlaceholderText("Burke")
-  const emailInput = screen.getByPlaceholderText("bluebill1049@hotmail.com")
-  const submitButton = screen.getByRole("button")
+  const firstNameInput = screen.queryByPlaceholderText("Edd")
+  const lastNameInput = screen.queryByPlaceholderText("Burke")
+  const emailInput = screen.queryByPlaceholderText("bluebill1049@hotmail.com")
+  const submitButton = screen.queryByRole("button")
 
   userEvent.type(firstNameInput, "Lotaska")
   userEvent.type(lastNameInput, "Harconius")
@@ -140,11 +141,11 @@ test('renders all firstName, lastName and email text when submitted. Does NOT re
 test('renders all fields text when all fields are submitted.', async () => {
 render(<ContactForm />)
 
-  const firstNameInput = screen.getByPlaceholderText("Edd")
-  const lastNameInput = screen.getByPlaceholderText("Burke")
-  const emailInput = screen.getByPlaceholderText("bluebill1049@hotmail.com")
-  const messageInput = screen.getByLabelText("Message")//had to cus no placeholder
-  const submitButton = screen.getByRole("button")
+  const firstNameInput = screen.queryByPlaceholderText("Edd")
+  const lastNameInput = screen.queryByPlaceholderText("Burke")
+  const emailInput = screen.queryByPlaceholderText("bluebill1049@hotmail.com")
+  const messageInput = screen.queryByLabelText("Message")//had to cus no placeholder
+  const submitButton = screen.queryByRole("button")
   
   userEvent.type(firstNameInput, "Lotaska")
   userEvent.type(lastNameInput, "Harconius")
