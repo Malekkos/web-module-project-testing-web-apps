@@ -4,8 +4,17 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import ContactForm from './ContactForm';
 
-test('renders without errors', () => {
+//Should try to break it first after writing it
+// check all input fields - do they work as intended?
+// theres a link in the top right of the page. Functionally, it should do something or go somewhere.
+// does submit work?
+//does submit work despite missing fields?
+// does submit work despite Required missing fields?
 
+
+test('renders without errors', () => {
+  render(<ContactForm />)
+  //If ContactForm is NOT imported, the test fails
 });
 
 test('renders the contact form header', () => {
