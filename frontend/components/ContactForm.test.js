@@ -132,6 +132,9 @@ test('renders all firstName, lastName and email text when submitted. Does NOT re
   userEvent.type(emailInput, "W0rldRul3r@warlord.com")
   userEvent.click(submitButton)
   expect(screen.getByTestId("firstnameDisplay")).toHaveTextContent("First Name: Lotaska")
+  expect(screen.getByTestId("lastnameDisplay")).toHaveTextContent("Last Name: Harconius")
+  expect(screen.getByTestId("emailDisplay")).toHaveTextContent("W0rldRul3r@warlord.com")
+  
 });
 
 test('renders all fields text when all fields are submitted.', async () => {
