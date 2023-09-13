@@ -34,17 +34,26 @@ test('renders the contact form header', () => {
   render(<ContactForm />)
   //Act
   const header = screen.getByText("Contact Form") // dont need the special way of //i because this is hardcoded
-  console.log(header)
+  // console.log(header)
   //Assert
   // Reqs are ; be in the document, determine if 'heads' is truthy?, and if text content is what it should be
   expect(header).toBeInTheDocument()
-  expect(header).toBetruthy() // I dont understand
+  expect(header).toBetruthy() // I dont understand, reference video
   expect(header).toHaveTextContent("Contact Form")
 
 });
 
 test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
-
+  //Arrange
+  render(<ContactForm />)
+  //Act
+  const firstNameInput = screen.getByPlaceholderText("Edd")
+  // console.log(firstNameInput)//It is getting it
+  await userEvent.click(firstNameInput)
+  await userEvent.type(firstNameInput, "eddy") //When doing type, YOU HAVE TO TELL IT WHERE TO TYPE!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //Assert
+  await expect(screen.queryByTestId("error"))
+  //pretty sure i didnt use await right, reference video
 });
 
 test('renders THREE error messages if user enters no values into any fields.', async () => {
