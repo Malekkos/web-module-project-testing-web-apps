@@ -11,6 +11,18 @@ import ContactForm from './ContactForm';
 //does submit work despite missing fields?
 // does submit work despite Required missing fields?
 
+//Arrange
+//Render the stuff
+//Act
+//Find the stuff your gonna check
+//Assert
+//run the checks
+
+
+
+
+
+
 
 test('renders without errors', () => {
   render(<ContactForm />)
@@ -18,6 +30,16 @@ test('renders without errors', () => {
 });
 
 test('renders the contact form header', () => {
+  //Arrange
+  render(<ContactForm />)
+  //Act
+  const header = screen.getByText("Contact Form") // dont need the special way of //i because this is hardcoded
+  console.log(header)
+  //Assert
+  // Reqs are ; be in the document, determine if 'heads' is truthy?, and if text content is what it should be
+  expect(header).toBeInTheDocument()
+  expect(header).toBetruthy() // I dont understand
+  expect(header).toHaveTextContent("Contact Form")
 
 });
 
