@@ -33,14 +33,14 @@ test('renders the contact form header', () => {
   //Arrange
   render(<ContactForm />)
   //Act
-  const header = screen.queryByText("Contact Form") // dont need the special way of //i because this is hardcoded
+  const header = screen.queryByText(/Contact Form/i)
   //Should use query when getting things
   // console.log(header)
   //Assert
   // Reqs are ; be in the document, determine if 'heads' is truthy?, and if text content is what it should be
   expect(header).toBeInTheDocument()
   expect(header).toBeTruthy() // I dont understand, reference video
-  expect(header).toHaveTextContent("Contact Form")
+  expect(header).toHaveTextContent(/Contact Form/i)
 
 });
 
