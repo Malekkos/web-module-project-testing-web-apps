@@ -39,7 +39,7 @@ test('renders the contact form header', () => {
   //Assert
   // Reqs are ; be in the document, determine if 'heads' is truthy?, and if text content is what it should be
   expect(header).toBeInTheDocument()
-  expect(header).toBetruthy() // I dont understand, reference video
+  expect(header).toBeTruthy() // I dont understand, reference video
   expect(header).toHaveTextContent("Contact Form")
 
 });
