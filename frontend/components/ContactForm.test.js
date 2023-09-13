@@ -57,7 +57,24 @@ test('renders ONE error message if user enters less then 5 characters into first
 });
 
 test('renders THREE error messages if user enters no values into any fields.', async () => {
+  render(<ContactForm />)
 
+  const firstNameInput = screen.getByPlaceholderText("Edd")
+  const lastNameInput = screen.getByPlaceholderText("Burke")
+  const emailInput = screen.getByPlaceholderText("bluebill1049@hotmail.com")
+  const submitButton = screen.getByRole("button")
+  
+  userEvent.type(firstNameInput, "asda")
+  userEvent.type(lastNameInput, "asdas")
+  userEvent.type(emailInput, "asdffF@gmail.com")
+  userEvent.clear(firstNameInput)
+  userEvent.clear(lastNameInput)
+  userEvent.clear(emailInput)
+  userEvent.click(submitButton)
+  // console.log(firstNameInput)
+  // I've realized in hindsight that its if they click the submit button.
+  const errorsArray =  screen.getAllByTestId("error")
+  await expect(errorsArray).toHaveLength(3)
 });
 
 test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
